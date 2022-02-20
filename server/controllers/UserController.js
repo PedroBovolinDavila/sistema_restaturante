@@ -25,16 +25,16 @@ module.exports = {
 
     const user = await User.findOne({ email });
 
-    if (!user) return res.render('login', { error: true, message: 'Email ou senha incorretos' });
+    if (!user) return res.redirect('/login?err=true');
 
     const passwordMatch = bcrypt.compareSync(password, user.password);
 
-    if (!passwordMatch) return res.render('login', { error: true, message: 'Email ou senha incorretos' });
+    if (!passwordMatch) return res.redirect('/login?err=true');
 
-    res.cookie('userId', user._id.toString(), {
-
-    });
+    res.cookie('userId', user._id.toString());
 
     return res.redirect('/');
   }
 }
+
+// TODO: Corrigir erro do login que ta enviando para outra pagina

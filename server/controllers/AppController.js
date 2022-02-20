@@ -5,6 +5,13 @@ module.exports = {
   },
 
   login(req, res) {
-    res.render('login');
+    const { err } = req.query;
+
+    if (!err) {
+      res.render('login', { error: false, message: '' });
+    } else {
+      res.render('login', { error: true, message: 'Email ou senha incorretos' });
+    }
+
   },
 }
