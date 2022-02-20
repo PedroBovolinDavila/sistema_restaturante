@@ -8,18 +8,22 @@
 }
 
 :root {
-  --pink1: #f72585;
-  --pink2: #b5179e;
-  --purple1: #7209b7;
-  --purple2: #560bad;
-  --purple3: #480ca8;
-  --blue1: #3a0ca3;
-  --blue2: #3f37c9;
-  --blue3: #4361ee;
-  --blue4: #4895ef;
-  --blue5: #4cc9f0;
+  --blue1: #012a4a;
+  --blue2: #013a63;
+  --blue3: #01497c;
+  --blue4: #014f86;
+  --blue5: #2a6f97;
+  --blue6: #2c7da0;
+  --blue7: #468faf;
+  --blue8: #61a5c2;
+  --blue9: #89c2d9;
+  --blue10: #a9d6e5;
 }
 
 ul {
   list-style: none;
+}
+
+.container-full {
+  padding: 0 calc((100vw - 1500px) / 2);
 }

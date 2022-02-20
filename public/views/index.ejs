@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-  <%- include('partials/head', {title: 'Restaurante' , noValidate: false}) %>
+  <%- include('partials/head', {title: 'Restaurante' , noValidate: false, noNav: false}) %>
 </head>
 
 <body>
-  index
+  <%- include('partials/navbar', { username: user.name, avatar: user.avatar} ) %>
+    index
 </body>
 
 </html>
