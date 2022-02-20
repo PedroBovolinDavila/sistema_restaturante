@@ -36,5 +36,3 @@ module.exports = {
     return res.redirect('/');
   }
 }
-
-// TODO: Corrigir erro do login que ta enviando para outra pagina

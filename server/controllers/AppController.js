@@ -1,7 +1,16 @@
+const getUserData = require('../services/getUserData');
 
 module.exports = {
-  index(req, res) {
-    res.render('index');
+  async index(req, res) {
+    const { userId } = req.cookies
+
+    const user = await getUserData(userId);
+
+    if (!userId) {
+      res.render('index', { user: { name: "" } });
+    } else {
+      res.render('index', { user })
+    }
   },
 
   login(req, res) {
