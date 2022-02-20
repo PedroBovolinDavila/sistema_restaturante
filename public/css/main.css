@@ -7,6 +7,19 @@
   font-family: "Roboto", Helvetica, sans-serif;
 }
 
+:root {
+  --pink1: #f72585;
+  --pink2: #b5179e;
+  --purple1: #7209b7;
+  --purple2: #560bad;
+  --purple3: #480ca8;
+  --blue1: #3a0ca3;
+  --blue2: #3f37c9;
+  --blue3: #4361ee;
+  --blue4: #4895ef;
+  --blue5: #4cc9f0;
+}
+
 ul {
   list-style: none;
 }

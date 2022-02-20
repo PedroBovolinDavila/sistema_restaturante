@@ -1,9 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <%- include('partials/head', {title: 'Login', noValidate: true}) %>
+  <%- include('partials/head', {title: 'Login' , noValidate: true}) %>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
+
 <body>
-  login
+  <div class="container">
+    <h1 class="title">Entrar</h1>
+    <form method="post" action="/users/login">
+      <div class="inputs">
+        <div class="input-field">
+          <label for="email">Email</label>
+          <div class="input-container">
+            <input placeholder="Informe seu email" type="text" name="email" id="email">
+            <i class="fa-solid fa-user"></i>
+          </div>
+        </div>
+        <div class="input-field">
+          <label for="password">Senha</label>
+          <div class="input-container">
+            <input placeholder="Informe sua senha" type="password" name="password" id="password">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+        </div>
+      </div>
+
+      <input class="button" type="submit" value="Entrar">
+    </form>
+  </div>
 </body>
+
 </html>
