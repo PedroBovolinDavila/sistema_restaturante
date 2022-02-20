@@ -10,5 +10,6 @@ router.get('/login', AppController.login);
 // User routes 
 
 router.post('/users/validate/:id', UserController.validate);
+router.post('/users/login', UserController.login);
 
 module.exports = router;

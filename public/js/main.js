@@ -1,4 +1,4 @@
-let userId = localStorage.getItem('userId');
+let userId = document.cookie.split('=')[1];
 
 fetch(`/users/validate/${userId}`, { method: 'post' })
   .then(res => res.json())
