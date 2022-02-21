@@ -16,6 +16,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use('/css', express.static(path.join(__dirname, '..', '/public/css')));
 app.use('/js', express.static(path.join(__dirname, '..', '/public/js')));
+app.use('/img', express.static(path.join(__dirname, '..', '/public/images')));
 app.use(routes);
 
 app.set('view engine', 'ejs');

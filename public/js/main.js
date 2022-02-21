@@ -12,6 +12,8 @@ function validateLogin(id) {
     .then(data => {
       if (!data.logged) {
         window.location.href = '/login';
+      } else if (!data.user.isAdmin) {
+        window.location.href = '/public'
       }
     });
 

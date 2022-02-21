@@ -21,6 +21,5 @@ module.exports = {
     } else {
       res.render('login', { error: true, message: 'Email ou senha incorretos' });
     }
-
   },
 }

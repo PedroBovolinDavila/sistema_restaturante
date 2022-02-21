@@ -1,0 +1,262 @@
+.tableContainer {
+  font-size: 15px;
+  font-weight: normal;
+  border: none;
+  width: 900px;
+  border-collapse: collapse;
+  white-space: nowrap;
+  background-color: white;
+}
+
+.tableContainer td,
+.tableContainer th {
+  text-align: center;
+  padding: 8px;
+}
+
+.tableContainer td {
+  font-size: 14px;
+}
+
+.tableContainer thead th {
+  color: #ffffff;
+  background: #52b788;
+}
+
+.tableContainer thead th:nth-child(odd) {
+  color: #ffffff;
+  background: #40916c;
+}
+
+.tableContainer tr:nth-child(even) {
+  background: #f8f8f8;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+  .tableContainer {
+    display: block;
+    width: 100%;
+  }
+  .table-wrapper:before {
+    content: "Scroll horizontally >";
+    display: block;
+    text-align: right;
+    font-size: 14px;
+    color: white;
+    padding: 0 0 10px;
+  }
+  .tableContainer thead,
+  .tableContainer tbody,
+  .tableContainer thead th {
+    display: block;
+  }
+  .tableContainer thead th:last-child {
+    border-bottom: none;
+  }
+  .tableContainer thead {
+    float: left;
+  }
+  .tableContainer tbody {
+    width: auto;
+    position: relative;
+    overflow-x: auto;
+  }
+  .tableContainer td,
+  .tableContainer th {
+    padding: 20px 0.625em 0.625em 0.625em;
+    height: 60px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 120px;
+    font-size: 13px;
+    text-overflow: ellipsis;
+  }
+  .tableContainer thead th {
+    text-align: left;
+  }
+  .tableContainer tbody tr {
+    display: table-cell;
+  }
+  .tableContainer tbody tr:nth-child(odd) {
+    background: none;
+  }
+  .tableContainer tr:nth-child(even) {
+    background: transparent;
+  }
+  .tableContainer tr td:nth-child(odd) {
+    background: #f8f8f8;
+    border-right: 1px solid #e6e4e4;
+  }
+  .tableContainer tr td:nth-child(even) {
+    border-right: 1px solid #e6e4e4;
+  }
+  .tableContainer tbody td {
+    display: block;
+    text-align: center;
+  }
+}
+
+/* -- CSS --  */
+
+.dataContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 80px;
+  background-color: #2d6a4f;
+}
+
+.tableWrapper {
+  height: 500px;
+  overflow: auto;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 25%;
+  gap: 15px;
+}
+
+.inputsContainer div {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.inputsContainer div label {
+  font-size: 1.2rem;
+}
+
+.inputsContainer div input,
+.inputsContainer div select {
+  width: 100%;
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  margin-top: 5px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 53%;
+  margin-left: 80px;
+  margin-top: 40px;
+}
+
+.buttonRed {
+  background-color: red;
+}
+
+.buttonYellow {
+  background-color: yellow;
+  color: black !important;
+}
+
+.buttonGreen {
+  background-color: green;
+}
+
+.button {
+  border: none;
+  outline: none;
+  width: 200px;
+  padding: 15px 25px;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+@media (max-width: 1450px) {
+  .dataContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .table-wrapper {
+    align-self: center;
+  }
+
+  .buttonContainer {
+    width: 80%;
+    justify-content: space-between;
+    align-self: center;
+    margin-left: 0;
+  }
+
+  .inputsContainer {
+    flex-direction: row;
+    margin: 25px 0 50px 0;
+    width: 100%;
+  }
+
+  .button {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inputsContainer div {
+    margin: 0 15px;
+  }
+
+  .inputsContainer div input,
+  .inputsContainer div select {
+    width: 250px;
+  }
+
+  .tableContainer {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .tableWrapper {
+    height: 350px;
+  }
+
+  .inputsContainer {
+    width: 80vw;
+  }
+
+  .inputsContainer div {
+    width: 100%;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    width: 100%;
+    gap: 25px;
+  }
+
+  .button {
+    width: 100%;
+    display: block;
+  }
+
+  .inputsContainer div input,
+  .inputsContainer div select {
+    width: 100%;
+  }
+}

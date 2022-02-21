@@ -3,11 +3,29 @@
 
 <head>
   <%- include('partials/head', {title: 'Restaurante' , noValidate: false, noNav: false}) %>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <body>
   <%- include('partials/navbar', { username: user.name, avatar: user.avatar} ) %>
-    index
+    <main class="main container-full">
+      <div class="wrapper">
+        <% if (user.isAdmin) { %>
+          <a href="/gestao/funcionarios" class="card">
+            <i class="fa-solid fa-user-gear"></i>
+            <h1>Gestão de funcionarios</h1>
+          </a>
+          <a href="/gestao/produtos" class="card">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <h1>Gestão de produtos</h1>
+          </a>
+          <% } %>
+            <a href="/gestao/salao" class="card">
+              <i class="fa-solid fa-store"></i>
+              <h1>Salão</h1>
+            </a>
+      </div>
+    </main>
 </body>
 
 </html>
