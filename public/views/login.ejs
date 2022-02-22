@@ -14,29 +14,40 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1 class="title">Entrar</h1>
-    <form method="post" action="/users/login">
-      <div class="inputs">
-        <div class="input-field">
-          <label for="email">Email</label>
-          <div class="input-container">
-            <input required placeholder="Informe seu email" type="email" name="email" id="email">
-            <i class="fa-solid fa-user"></i>
-          </div>
-        </div>
-        <div class="input-field">
-          <label for="password">Senha</label>
-          <div class="input-container">
-            <input required placeholder="Informe sua senha" type="password" name="password" id="password">
-            <i class="fa-solid fa-lock"></i>
+  <section class="hero has-background-white-ter is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop">
+            <form class="box" action="/users/login" method="post">
+              <h3 class="title is-3">Entrar</h3>
+              <div class="field">
+                <label class="label" for="email">Email</label>
+                <div class="control has-icons-left">
+                  <input type="email" placeholder="Informe seu email" name="email" class="input" required>
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-envelope"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="email">Senha</label>
+                <div class="control has-icons-left">
+                  <input type="password" placeholder="Informe sua senha" name="password" class="input" required>
+                  <span class="icon is-small is-left">
+                    <i class="fa-solid fa-lock"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <button class="button is-success">Entrar</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-
-      <input class="button" type="submit" value="Entrar">
-    </form>
-  </div>
+    </div>
+  </section>
 
   <% if (error) { %>
     <div class="modal-container">
