@@ -1,14 +1,30 @@
-<header class="header">
-  <p>
-    Seja bem-vindo
-    <span>
-      <%= username %>
-    </span>
-  </p>
-  <div class="menu">
-    <img class="toggle-menu" onclick="showMenu()" src="<%= avatar %> " alt="Avatar url">
-    <nav class="dropdown hide">
-      <div onclick="deslogar()">Deslogar</div>
-    </nav>
-  </div>
+<header>
+  <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <h2 class="title is-3" id="navTitle">
+          Olá, <%= username %>
+        </h2>
+      </a>
+
+      <a role="button" class="navbar-burger" onclick="showMenu()" id="navButton" aria-label="menu" aria-expanded="false"
+        data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarMenu" class="navbar-menu is-info">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary" onclick="deslogar()">
+              <strong>Deslogar</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>

@@ -29,5 +29,6 @@ function deslogar() {
 }
 
 function showMenu() {
-  dropdown.classList.toggle('hide');
+  document.querySelector('#navButton').classList.toggle('is-active');
+  document.querySelector('#navbarMenu').classList.toggle('is-active');
 }
