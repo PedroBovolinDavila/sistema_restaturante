@@ -3,7 +3,7 @@ const buttonMenu = document.querySelector('.toggle-menu');
 const dropdown = document.querySelector('.dropdown');
 
 function validateLogin(id) {
-  if (!id.trim()) {
+  if (!id) {
     window.location.href = '/login';
   }
 
@@ -12,8 +12,6 @@ function validateLogin(id) {
     .then(data => {
       if (!data.logged) {
         window.location.href = '/login';
-      } else if (!data.user.isAdmin) {
-        window.location.href = '/public'
       }
     });
 
