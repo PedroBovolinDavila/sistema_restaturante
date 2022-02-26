@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-dark bg-dark">
     <div class="container">
       <a href="/" class="navbar-brand">Sistema restaurante
       </a>
@@ -90,10 +90,11 @@
                             <% } %>
 
                               <li class="nav-item mt-3">
-                                <a onclick="deslogar()" class="nav-link pe-auto" href="/">
+                                <button class="btn link-danger ps-0 pe-auto" type="button" data-bs-toggle="modal"
+                                  data-bs-target="#staticBackdrop">
                                   <i class="fa-solid fa-arrow-right-from-bracket me-1 fs-6"></i>
                                   Sair
-                                </a>
+                                </button>
                               </li>
           </ul>
 
@@ -103,3 +104,23 @@
     </div>
   </nav>
 </header>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Sair do sistema</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Deseja realmente sair do sistema?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="deslogar()" class="btn btn-success">Sair</button>
+      </div>
+    </div>
+  </div>
+</div>
