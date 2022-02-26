@@ -6,47 +6,9 @@
 </head>
 
 <body>
-  <%- include('partials/navbar', { username: user.name, avatar: user.avatar} ) %>
+  <%- include('partials/navbar', { username: user.name, active: 'home' } ) %>
 
-    <main class="hero is-fullheight-with-navbar is-white-ter">
-      <div class="hero-body">
-        <div class="container">
-          <div class="columns is-centered">
 
-            <% if (user.isAdmin) { %>
-              <div class="column is-3">
-                <a href="/gestao/funcionarios"
-                  class="box is-clickable has-text-centered has-text-white has-background-info is-flex is-flex-direction-column is-justify-content-center is-align-itens-center">
-
-                  <i class="fa-solid fa-users-gear is-size-2 mb-5"></i>
-                  <span class=" is-size-5">Gestão de funcionários</span>
-
-                </a>
-              </div>
-              <div class="column is-3">
-                <a href="/gestao/produtos"
-                  class="box is-clickable has-text-centered has-text-white has-background-info is-flex is-flex-direction-column is-justify-content-center is-align-itens-center">
-
-                  <i class="fa-solid fa-users-gear is-size-2 mb-5"></i>
-                  <span class=" is-size-5">Gestão de produtos</span>
-
-                </a>
-              </div>
-              <% } %>
-
-                <div class="column is-3">
-                  <a href="/gestao/salao"
-                    class="box is-clickable has-text-centered has-text-white has-background-info is-flex is-flex-direction-column is-justify-content-center is-align-itens-center">
-
-                    <i class="fa-solid fa-users-gear is-size-2 mb-5"></i>
-                    <span class=" is-size-5">Salão</span>
-
-                  </a>
-                </div>
-          </div>
-        </div>
-      </div>
-    </main>
 
 </body>
 

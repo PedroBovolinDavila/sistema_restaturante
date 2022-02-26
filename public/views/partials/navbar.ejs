@@ -1,56 +1,105 @@
 <header>
-  <nav class="navbar is-info" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <p class="title is-2" id="navTitle">
-          Olá, <%= username %>
-        </p>
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a href="/" class="navbar-brand">Sistema restaurante
       </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Olá, <%= username %>
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
-      <a role="button" class="navbar-burger" onclick="showMenu()" id="navButton" aria-label="menu" aria-expanded="false"
-        data-target="navbarMenu">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+            <% if (active==='home' ) { %>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">
+                  <i class="fa-solid fa-house me-1 fs-6"></i>
+                  Home
+                </a>
+              </li>
+              <% } else { %>
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="/">
+                    <i class="fa-solid fa-house me-1 fs-6"></i>
+                    Home
+                  </a>
+                </li>
+                <% } %>
+
+                  <% if (active==='salao' ) { %>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="/gestao/salao">
+                        <i class="fa-solid fa-cart-shopping me-1 fs-6"></i>
+                        Salão
+                      </a>
+                    </li>
+                    <% } else { %>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/gestao/salao">
+                          <i class="fa-solid fa-cart-shopping me-1 fs-6"></i>
+                          Salão
+                        </a>
+                      </li>
+                      <% } %>
+
+                        <% if (active==='gestao' ) { %>
+                          <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" id="offcanvasNavbarDropdown"
+                              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-chart-column me-1 fs-6"></i>
+                              Gestão
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                              <li><a class="dropdown-item" href="/gestao/funcionarios">
+                                  <i class="fa-solid fa-user-gear me-1 fs-6"></i>
+                                  Funcionarios
+                                </a></li>
+                              <li><a class="dropdown-item" href="/gestao/produtos">
+                                  <i class="fa-solid fa-burger me-1 fs-6"></i>
+                                  Produtos
+                                </a></li>
+                            </ul>
+                          </li>
+                          <% } else { %>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-chart-column me-1 fs-6"></i>
+                                Gestão
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                                <li><a class="dropdown-item" href="/gestao/funcionarios">
+                                    <i class="fa-solid fa-user-gear me-1 fs-6"></i>
+                                    Funcionarios
+                                  </a></li>
+                                <li><a class="dropdown-item" href="/gestao/produtos">
+                                    <i class="fa-solid fa-burger me-1 fs-6"></i>
+                                    Produtos
+                                  </a></li>
+                              </ul>
+                            </li>
+                            </li>
+                            <% } %>
+
+                              <li class="nav-item mt-3">
+                                <a onclick="deslogar()" class="nav-link pe-auto" href="/">
+                                  <i class="fa-solid fa-arrow-right-from-bracket me-1 fs-6"></i>
+                                  Sair
+                                </a>
+                              </li>
+          </ul>
+
+
+        </div>
+      </div>
     </div>
-
-    <div id="navbarMenu" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="/">
-          Inicio
-        </a>
-
-        <a class="navbar-item" href="/gestao/salao">
-          Salão
-        </a>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Gestão
-          </a>
-
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="/gestao/funcionarios">
-              Funcionarios
-            </a>
-            <a class="navbar-item" href="/gestao/produtos">
-              Produtos
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="navbar-end">
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary" onclick="deslogar()">
-                <strong>Deslogar</strong>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
   </nav>
 </header>
