@@ -22,4 +22,22 @@ module.exports = {
       res.render('login', { error: true, message: 'Email ou senha incorretos' });
     }
   },
+
+  async gestao(req, res) {
+    const { view } = req.params;
+    const { userId } = req.cookies;
+
+    const user = await getUserData(userId);
+
+    if (!user) res.redirect('/');
+    if (!view) res.redirect('/');
+
+    if (view === 'funcionarios') {
+      res.render('gestao/funcionarios', { user });
+    } else if (view === 'produtos') {
+      res.render('gestao/produtos', { user });
+    } else if (view === 'salao') {
+      res.render('gestao/salao', { user });
+    }
+  }
 }

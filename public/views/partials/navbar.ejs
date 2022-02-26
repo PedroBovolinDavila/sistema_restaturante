@@ -15,16 +15,42 @@
       </a>
     </div>
 
-    <div id="navbarMenu" class="navbar-menu has-background-info">
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-primary" onclick="deslogar()">
-              <strong>Deslogar</strong>
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/">
+          Inicio
+        </a>
+
+        <a class="navbar-item" href="/gestao/salao">
+          Salão
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Gestão
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/gestao/funcionarios">
+              Funcionarios
+            </a>
+            <a class="navbar-item" href="/gestao/produtos">
+              Produtos
             </a>
           </div>
         </div>
       </div>
-    </div>
+
+      <div class="navbar-end">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary" onclick="deslogar()">
+                <strong>Deslogar</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
   </nav>
 </header>

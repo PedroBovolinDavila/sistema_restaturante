@@ -6,6 +6,7 @@ const UserController = require('./controllers/UserController');
 
 router.get('/', AppController.index);
 router.get('/login', AppController.login);
+router.get('/gestao/:view', AppController.gestao);
 
 // User routes 
 
