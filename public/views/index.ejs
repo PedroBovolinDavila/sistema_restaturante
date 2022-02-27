@@ -3,12 +3,39 @@
 
 <head>
   <%- include('partials/head', {title: 'Restaurante' , noValidate: false, noNav: false}) %>
+    <script src="/js/index.js" defer></script>
 </head>
 
 <body>
   <%- include('partials/navbar', { username: user.name, active: 'home' } ) %>
+    <audio id="audio" src="/audio/sino.mp3"></audio>
 
-
+    <div class="container">
+      <div class="row align-items-center mt-4">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <!-- <caption>Lista de pedidos</caption> -->
+              <thead>
+                <tr>
+                  <th scope="col">Mesa</th>
+                  <th scope="col">Pedido</th>
+                  <th scope="col">Adicionais</th>
+                </tr>
+              </thead>
+              <tbody id="table-data-add">
+                <!-- Conteudo adicionado via javascript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          asdoapsdopasdo
+        </div>
+      </div>
+    </div>
 
 </body>
 

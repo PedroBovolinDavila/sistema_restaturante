@@ -15,6 +15,7 @@ const app = express();
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use('/css', express.static(path.join(__dirname, '..', '/public/css')));
+app.use('/audio', express.static(path.join(__dirname, '..', '/public/audio')));
 app.use('/js', express.static(path.join(__dirname, '..', '/public/js')));
 app.use('/img', express.static(path.join(__dirname, '..', '/public/images')));
 app.use(routes);
