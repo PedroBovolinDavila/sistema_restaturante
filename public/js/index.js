@@ -1,6 +1,7 @@
-const table = document.querySelector('#table-data-add');
+var socket = io('http://192.168.15.9:3333')
+
 const body = document.querySelector('body');
-let length;
+const table = document.querySelector('#table-data-add');
 
 const audio = document.createElement('audio');
 audio.src = '/audio/sino.mp3';
@@ -10,38 +11,9 @@ body.addEventListener('load', () => {
   playAudio();
 });
 
-const fakeData = [
-  {
-    id: 1,
-    mesa: 14,
-    desc: '1 xtudo - 1 xsalada - 1 xbacon',
-    adicionais: 'xtudo sem cebola'
-  },
-  {
-    id: 2,
-    mesa: 16,
-    desc: '1 xtudo - 1 xsalada - 1 xbacon',
-    adicionais: 'xtudo sem cebola'
-  },
-  {
-    id: 3,
-    mesa: 3,
-    desc: '1 xtudo - 1 xsalada - 1 xbacon',
-    adicionais: 'xtudo sem cebola'
-  },
-  {
-    id: 4,
-    mesa: 24,
-    desc: '1 xtudo - 1 xsalada - 1 xbacon',
-    adicionais: 'xtudo sem cebola'
-  },
-  {
-    id: 5,
-    mesa: 13,
-    desc: '1 xtudo - 1 xsalada - 1 xbacon',
-    adicionais: 'xtudo sem cebola'
-  },
-]
+const playAudio = () => {
+  audio.play();
+}
 
 const createTableData = (pedido) => {
   const data = document.createElement('tr');
@@ -51,40 +23,21 @@ const createTableData = (pedido) => {
   <td>${pedido.adicionais}</td>
   `
 
-  data.id = pedido.id;
+  data.id = pedido._id;
   data.innerHTML = dataHTML;
 
   table.appendChild(data);
 }
 
-const playAudio = () => {
-  audio.play();
-}
+socket.on('reciviedReq', data => {
+  createTableData(data);
+  playAudio();
+})
 
-const getDataAndUpdate = () => {
-  length = table.innerHTML.length;
+socket.on('anterior', (data) => {
   table.innerHTML = '';
-
-  fakeData.map(data => {
-    createTableData(data)
-  })
-
-  if (table.innerHTML.length > length) {
-    console.log('tem novo');
-    playAudio()
+  for (message of data) {
+    createTableData(message);
   }
-}
-getDataAndUpdate()
-
-const newData = {
-  id: 3333,
-  mesa: 27,
-  desc: 'fdabio',
-  adicionais: '123321'
-}
-
-setTimeout(() => fakeData.push(newData), 10000);
-setTimeout(() => fakeData.push(newData), 20000);
-setTimeout(() => fakeData.push(newData), 30000);
-setTimeout(() => fakeData.push(newData), 40000);
-setInterval(() => getDataAndUpdate(), 1500);
+  playAudio();
+})

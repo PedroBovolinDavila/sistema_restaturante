@@ -3,13 +3,26 @@
 
 <head>
   <%- include('../partials/head', {title: 'Restaurante' , noValidate: false, noNav: false}) %>
-    <link rel="stylesheet" href="/css/gestao.css">
 </head>
 
 <body>
   <%- include('../partials/navbar', { username: user.name, active: 'salao' } ) %>
 
-    salao
+    <div class="row">
+      <div class="col-12">
+        <form id="form">
+          <input type="number" placeholder="mesa" name="mesa" id="mesa">
+          <input type="text" placeholder="desc" name="desc" id="desc">
+          <input type="text" placeholder="adicionais" name="adicionais" id="adicionais">
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"
+      integrity="sha512-MgkNs0gNdrnOM7k+0L+wgiRc5aLgl74sJQKbIWegVIMvVGPc1+gc1L2oK9Wf/D9pq58eqIJAxOonYPVE5UwUFA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/salao.js" defer></script>
 </body>
 
 </html>

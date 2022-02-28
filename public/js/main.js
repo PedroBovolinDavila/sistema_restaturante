@@ -1,6 +1,4 @@
-const userId = document.cookie.split('=')[1];
-const buttonMenu = document.querySelector('.toggle-menu');
-const dropdown = document.querySelector('.dropdown');
+const userId = localStorage.getItem('userId');
 
 function validateLogin(id) {
   if (!id) {
@@ -14,19 +12,13 @@ function validateLogin(id) {
         window.location.href = '/login';
       }
     });
-
-  localStorage.setItem('userId', userId);
 }
-validateLogin(userId);
+
+validateLogin(userId)
 
 function deslogar() {
-  document.cookie = 'userId='
   localStorage.removeItem('userId');
-  let userId = document.cookie.split('=')[1];
-  validateLogin(userId)
-}
-
-function showMenu() {
-  document.querySelector('#navButton').classList.toggle('is-active');
-  document.querySelector('#navbarMenu').classList.toggle('is-active');
+  const userId = localStorage.getItem('userId');
+  document.cookie = 'userId=false;'
+  validateLogin(userId);
 }

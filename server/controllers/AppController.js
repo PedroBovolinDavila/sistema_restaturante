@@ -7,7 +7,7 @@ module.exports = {
     const user = await getUserData(userId);
 
     if (!userId) {
-      res.render('index', { user: { name: "" } });
+      res.render('index', { user: { name: "", _id: '' } });
     } else {
       res.render('index', { user })
     }
@@ -39,5 +39,13 @@ module.exports = {
     } else if (view === 'salao') {
       res.render('gestao/salao', { user });
     }
+  },
+
+  logoff(req, res) {
+    res.clearCookie('userId');
+  },
+
+  getCooke(req, res) {
+    console.log(req.cookies)
   }
 }
