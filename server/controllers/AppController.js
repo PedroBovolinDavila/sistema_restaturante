@@ -43,9 +43,7 @@ module.exports = {
 
   logoff(req, res) {
     res.clearCookie('userId');
-  },
 
-  getCooke(req, res) {
-    console.log(req.cookies)
-  }
+    return res.json({ logoff: true });
+  },
 }

@@ -17,8 +17,18 @@ function validateLogin(id) {
 validateLogin(userId)
 
 function deslogar() {
-  localStorage.removeItem('userId');
-  const userId = localStorage.getItem('userId');
   document.cookie = 'userId=false;'
-  validateLogin(userId);
+  fetch('/logoff')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      if (data.logoff) {
+        localStorage.removeItem('userId');
+        const userId = localStorage.getItem('userId');
+        validateLogin(userId);
+      } else {
+        console.log('error')
+      }
+    })
+
 }
