@@ -83,10 +83,17 @@ function adicionais(e) {
 
   opcModal.show()
 
-  document.querySelector('#btnCancelar').addEventListener('click', () => console.log('cancelar'));
+  document.querySelector('#btnCancelar').addEventListener('click', () => {
+    fetch(`/finalizar/cancelar/${id}`, { method: 'post' })
+      .then(res => res.json())
+      .then(data => {
+        socket.emit('finishReq', data);
+        document.location.reload();
+      });
+  });
   document.querySelector('#btnSalvar').addEventListener('click', () => console.log('salvar'))
   document.querySelector('#btnFinalizar').addEventListener('click', () => {
-    fetch(`/finalizar/${id}`, { method: 'post' })
+    fetch(`/finalizar/concluir/${id}`, { method: 'post' })
       .then(res => res.json())
       .then(data => {
         socket.emit('finishReq', data);

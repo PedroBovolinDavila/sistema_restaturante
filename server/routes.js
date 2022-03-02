@@ -27,6 +27,7 @@ router.post('/pedidos/create', RequestController.create);
 
 router.get('/finalizar', FinishedController.finishDay);
 
-router.post('/finalizar/:reqId', FinishedController.add);
+router.post('/finalizar/concluir/:reqId', FinishedController.addConcluida);
+router.post('/finalizar/cancelar/:reqId', FinishedController.addCancelada);
 
 module.exports = router;

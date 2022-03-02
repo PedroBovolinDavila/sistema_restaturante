@@ -88,7 +88,7 @@
                             </li>
                             </li>
                             <% } %>
-
+                              danger
                               <li class="nav-item mt-3">
                                 <button class="btn link-danger ps-0 pe-auto" type="button" data-bs-toggle="modal"
                                   data-bs-target="#staticBackdrop">
@@ -96,6 +96,14 @@
                                   Sair
                                 </button>
                               </li>
+                              <% if (admin) { %>
+                                <li class="nav-item">
+                                  <button class="btn link-success ps-0 pe-auto" type="button" onclick="finalizarDia()">
+                                    <i class=" fa-solid fa-flag-checkered me-1 fs-6"></i>
+                                    Finalizar dia
+                                  </button>
+                                </li>
+                                <% } %>
           </ul>
 
 
@@ -119,6 +127,42 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="deslogar()" class="btn btn-success">Sair</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="modalFinalizarDia" tabindex="-1" aria-labelledby="modal2label" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal2label">Dia <span id="diaAtual"></span> finalizado</h5>
+        <button type="button" id="close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row mb-3">
+          <label for="totalPedidos" class="col-sm-2 col-form-label">Total:</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="totalPedidos" readonly>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="finalizados" class="col-sm-2 col-form-label">Finalizados:</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="finalizados" readonly>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="cancelados" class="col-sm-2 col-form-label">Cancelados:</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="cancelados" readonly>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="continuar" data-bs-dismiss="modal" class="btn btn-danger">Continuar</button>
         <button type="button" onclick="deslogar()" class="btn btn-success">Sair</button>
       </div>
     </div>

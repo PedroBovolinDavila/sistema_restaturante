@@ -11,6 +11,10 @@ const FinishedSchema = new mongoose.Schema({
   },
   adicionais: {
     type: String,
+  },
+  status: {
+    type: String,
+    required: true
   }
 })
 
