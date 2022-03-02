@@ -30,5 +30,4 @@ function deslogar() {
         console.log('error')
       }
     })
-
 }

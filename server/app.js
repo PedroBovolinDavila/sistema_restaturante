@@ -40,8 +40,6 @@ mongoose.connect(process.env.DATABASE_URL)
 // Open server
 
 io.on('connection', async (socket) => {
-  console.log(socket.id);
-
   const requests = await Request.find();
 
   socket.emit('anterior', requests)
@@ -50,6 +48,12 @@ io.on('connection', async (socket) => {
     const req = await Request.create(data);
 
     socket.broadcast.emit('reciviedReq', req);
+  })
+
+  socket.on('finishReq', async (data) => {
+    const requests = await Request.find();
+
+    socket.broadcast.emit('anterior', requests);
   })
 })
 

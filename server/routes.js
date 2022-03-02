@@ -2,6 +2,7 @@ const router = require('express').Router();
 const AppController = require('./controllers/AppController');
 const UserController = require('./controllers/UserController');
 const RequestController = require('./controllers/RequestController');
+const FinishedController = require('./controllers/FinishedController');
 
 // App routes
 
@@ -22,6 +23,10 @@ router.get('/pedidos/:id', RequestController.findById);
 
 router.post('/pedidos/create', RequestController.create);
 
+// Finished routes
 
+router.get('/finalizar', FinishedController.finishDay);
+
+router.post('/finalizar/:reqId', FinishedController.add);
 
 module.exports = router;

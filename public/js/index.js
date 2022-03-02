@@ -2,6 +2,9 @@ var socket = io('http://192.168.15.9:3333')
 
 const body = document.querySelector('body');
 const table = document.querySelector('#table-data-add');
+const opcModal = new bootstrap.Modal(document.getElementById('modal2'), {
+  keyboard: false
+})
 
 const audio = document.createElement('audio');
 audio.src = '/audio/sino.mp3';
@@ -18,12 +21,14 @@ const playAudio = () => {
 const createTableData = (pedido) => {
   const data = document.createElement('tr');
   const dataHTML = `
-  <th scope="row">${pedido.mesa}</th>
-  <td>${pedido.desc}</td>
-  <td>${pedido.adicionais}</td>
+  <th scope="row" id="${pedido._id}">${pedido.mesa}</th>
+  <td id="${pedido._id}">${pedido.desc}</td>
+  <td id="${pedido._id}">${pedido.adicionais}</td>
   `
 
   data.id = pedido._id;
+  data.addEventListener('click', adicionais)
+  data.classList.add('pe-auto');
   data.innerHTML = dataHTML;
 
   table.appendChild(data);
@@ -41,3 +46,51 @@ socket.on('anterior', (data) => {
   }
   playAudio();
 })
+
+const AddPedido = () => {
+  let mesa = document.querySelector('#numeroMesa').value;
+  let desc = document.querySelector('#pedido').value;
+  let adicionais = document.querySelector('#adicionais').value;
+
+  if (!mesa || !desc) return;
+
+  const obj = {
+    mesa,
+    desc,
+    adicionais,
+  }
+
+  socket.emit('sendReq', obj);
+
+  document.location.reload();
+}
+
+function adicionais(e) {
+  const id = e.target.id;
+  const modalMesa = document.querySelector('#modalMesa');
+  const modalNumeroMesa = document.querySelector('#modalNumeroMesa');
+  const modalPedido = document.querySelector('#modalPedido');
+  const modalAdicionais = document.querySelector('#modalAdicionais');
+
+  fetch(`/pedidos/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      modalMesa.innerHTML = data.mesa
+      modalNumeroMesa.value = data.mesa
+      modalPedido.value = data.desc
+      modalAdicionais.value = data.adicionais
+    });
+
+  opcModal.show()
+
+  document.querySelector('#btnCancelar').addEventListener('click', () => console.log('cancelar'));
+  document.querySelector('#btnSalvar').addEventListener('click', () => console.log('salvar'))
+  document.querySelector('#btnFinalizar').addEventListener('click', () => {
+    fetch(`/finalizar/${id}`, { method: 'post' })
+      .then(res => res.json())
+      .then(data => {
+        socket.emit('finishReq', data);
+        document.location.reload();
+      });
+  });
+}

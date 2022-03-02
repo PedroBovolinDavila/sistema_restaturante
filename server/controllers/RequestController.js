@@ -12,7 +12,7 @@ module.exports = {
   },
 
   async findById(req, res) {
-    const { id } = req.body;
+    const { id } = req.params;
 
     try {
 
@@ -37,6 +37,20 @@ module.exports = {
       })
 
       res.json(newRequest);
+
+    } catch (err) {
+      res.json(err);
+    }
+  },
+
+  async remove(req, res) {
+    const { id } = req.params;
+
+    try {
+
+      const request = await Request.findByIdAndRemove(id);
+
+      res.json(request);
 
     } catch (err) {
       res.json(err);
