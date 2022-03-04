@@ -37,7 +37,7 @@ mongoose.connect(process.env.DATABASE_URL)
   .then(() => console.log('Connected to Database'))
   .catch(err => console.log(err));
 
-// Open server
+// Socket io Config
 
 io.on('connection', async (socket) => {
   const requests = await Request.find();
@@ -56,6 +56,8 @@ io.on('connection', async (socket) => {
     socket.broadcast.emit('anterior', requests);
   })
 })
+
+// Open server
 
 const PORT = process.env.PORT || 3333;
 server.listen(PORT, () => console.log('Server running on port ' + PORT));
