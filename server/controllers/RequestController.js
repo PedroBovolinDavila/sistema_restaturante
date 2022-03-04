@@ -61,13 +61,6 @@ module.exports = {
     const { id } = req.params;
     const { mesa, desc, adicionais } = req.body;
 
-    if (!mesa || !desc || !adicionais) {
-      res.json({
-        err: 'no data'
-      })
-      return;
-    }
-
     try {
 
       const newRequest = await Request.findByIdAndUpdate(id, {

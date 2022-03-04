@@ -84,6 +84,7 @@ function adicionais(e) {
 
   opcModal.show()
 
+  // Botao de cancelar pedido
   document.querySelector('#btnCancelar').addEventListener('click', () => {
     fetch(`/finalizar/cancelar/${id}`, { method: 'post' })
       .then(res => res.json())
@@ -92,6 +93,8 @@ function adicionais(e) {
         document.location.reload();
       });
   });
+
+  // Botao de salvar pedido
   document.querySelector('#btnSalvar').addEventListener('click', () => {
     const newNumeroMesa = document.querySelector('#modalNumeroMesa').value;
     const newPedido = document.querySelector('#modalPedido').value;
@@ -118,7 +121,9 @@ function adicionais(e) {
         socket.emit('finishReq', data);
         document.location.reload();
       });
-  })
+  });
+
+  // Botao de finalizar pedido
   document.querySelector('#btnFinalizar').addEventListener('click', () => {
     fetch(`/finalizar/concluir/${id}`, { method: 'post' })
       .then(res => res.json())
