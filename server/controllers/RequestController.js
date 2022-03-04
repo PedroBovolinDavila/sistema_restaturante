@@ -55,5 +55,38 @@ module.exports = {
     } catch (err) {
       res.json(err);
     }
+  },
+
+  async update(req, res) {
+    const { id } = req.params;
+    const { mesa, desc, adicionais } = req.body;
+
+    if (!mesa || !desc || !adicionais) {
+      res.json({
+        err: 'no data'
+      })
+      return;
+    }
+
+    try {
+
+      const newRequest = await Request.findByIdAndUpdate(id, {
+        mesa,
+        desc,
+        adicionais
+      });
+
+      res.json({
+        pedido: newRequest,
+        success: true
+      });
+
+    } catch (err) {
+      res.json({
+        err,
+        success: false
+      });
+    }
+
   }
 }

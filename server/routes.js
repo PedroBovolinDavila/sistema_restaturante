@@ -22,6 +22,7 @@ router.get('/pedidos', RequestController.findAll);
 router.get('/pedidos/:id', RequestController.findById);
 
 router.post('/pedidos/create', RequestController.create);
+router.post('/pedidos/update/:id', RequestController.update);
 
 // Finished routes
 

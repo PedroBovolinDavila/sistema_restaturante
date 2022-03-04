@@ -67,6 +67,7 @@ const AddPedido = () => {
 
 function adicionais(e) {
   const id = e.target.id;
+
   const modalMesa = document.querySelector('#modalMesa');
   const modalNumeroMesa = document.querySelector('#modalNumeroMesa');
   const modalPedido = document.querySelector('#modalPedido');
@@ -91,7 +92,33 @@ function adicionais(e) {
         document.location.reload();
       });
   });
-  document.querySelector('#btnSalvar').addEventListener('click', () => console.log('salvar'))
+  document.querySelector('#btnSalvar').addEventListener('click', () => {
+    const newNumeroMesa = document.querySelector('#modalNumeroMesa').value;
+    const newPedido = document.querySelector('#modalPedido').value;
+    const newAdicionais = document.querySelector('#modalAdicionais').value;
+
+    if (!newNumeroMesa || !newPedido) return
+
+    fetch(`/pedidos/update/${id}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        mesa: newNumeroMesa,
+        desc: newPedido,
+        adicionais: newAdicionais
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (!data.success) return
+
+        socket.emit('finishReq', data);
+        document.location.reload();
+      });
+  })
   document.querySelector('#btnFinalizar').addEventListener('click', () => {
     fetch(`/finalizar/concluir/${id}`, { method: 'post' })
       .then(res => res.json())
