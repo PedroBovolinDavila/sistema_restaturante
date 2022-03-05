@@ -7,7 +7,84 @@
 
 <body>
   <%- include('../partials/navbar', { username: user.name, active: 'home' , admin: user.isAdmin }) %>
-    addProduto
+
+
+    <div class="w-full vh-100 d-flex justify-content-center align-items-center flex-column">
+      <% if (error !=undefined) { %>
+        <div class="container mb-4">
+          <div class="row mt-4">
+            <div class="col-12">
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error %>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+          <div class="col-11 col-lg-6 col-xl-4">
+            <form class="border border-dark rounded-1 p-5" action="/produtos/create" method="post"
+              enctype="multipart/form-data">
+
+              <p class="h4 mb-4 text-center">Adicionar produto</p>
+
+              <label for="nome">Nome</label>
+              <input name="nome" type="text" id="nome" class="form-control mb-4" placeholder="Informe o nome do produto"
+                required>
+
+              <label for="desc">Descrição</label>
+              <textarea name="desc" id="desc" class="form-control mb-4" placeholder="Descrição do produto"
+                required></textarea>
+
+              <label for="preco">Preço</label>
+              <input name="preco" type="text" id="preco" class="form-control mb-4" placeholder="R$ 00,00" required>
+
+              <div class="mb-4">
+                <label for="categoria">Categoria</label>
+                <select name="categoria" class="form-select" id="categoria" aria-label="Default select example"
+                  required>
+                  <!-- Conteudo adicionado por javascrip -->
+                </select>
+                <button type="button" class="link-info btn p-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Adicionar categoria
+                </button>
+              </div>
+
+              <label for="imagem" class="form-label">Imagem do produto</label>
+              <input class="form-control" type="file" name="image" id="imagem" required>
+
+              <button class="btn btn-info btn-block my-4" type="submit">Adicionar</button>
+
+            </form>
+          </div>
+    </div>
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Adicionar categoria</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <label for="novaCategoria">Categoria</label>
+            <input type="text" id="novaCategoria" class="form-control mb-4"
+              placeholder="Informe o nome da nova categoria">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-success" onclick="addCategoria()">Adicionar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/addProdutos.js" defer> </script>
+
 </body>
 
 </html>
