@@ -3,7 +3,6 @@ const Category = require('../models/Category');
 module.exports = {
   async add(req, res) {
     const { desc } = req.body;
-    const { redirect } = req.query;
 
     try {
 
@@ -16,18 +15,27 @@ module.exports = {
         return;
       }
 
-      await Category.create({
+      const newCategory = await Category.create({
         desc
       });
 
-      if (redirect === 'produtos') {
-        res.redirect('/add/produtos');
-      } else if (redirect === 'funcionarios') {
-        res.redirect('/add/funcionarios')
-      }
+      res.json({ newCategory, success: true });
 
     } catch (err) {
       res.json(err);
+      console.log(err.message);
+    }
+  },
+
+  async getAll(req, res) {
+    try {
+
+      const categories = await Category.find();
+
+      res.json(categories);
+
+    } catch (err) {
+      res.json(err)
       console.log(err.message);
     }
   }

@@ -56,6 +56,8 @@ router.post('/produtos/create', upload, ProductController.create);
 
 // Category routes 
 
+router.get('/categorias', CategoryController.getAll)
+
 router.post('/categorias/create', CategoryController.add);
 
 module.exports = router;
