@@ -10,7 +10,7 @@ module.exports = {
     const user = await getUserData(userId);
 
     if (!userId) {
-      res.render('index', { user: { name: "", _id: '' }, });
+      res.render('index', { user: { name: "", _id: '' }, error: undefined });
     } else {
       notAdminError ?
         res.render('index', { user, error: 'Você não tem permições suficientes.' }) :
@@ -69,7 +69,7 @@ module.exports = {
     const { view } = req.params;
     const { userId } = req.cookies;
 
-    const user = getUserData(userId);
+    const user = await getUserData(userId);
 
     if (!user || !view) {
       res.redirect('/')
@@ -77,10 +77,9 @@ module.exports = {
     }
 
     if (view === 'produtos') {
-      res.render('add/produtos', { user });
+      res.render('add/addProdutos', { user });
     } else if (view === 'funcionarios') {
-      res.render('add/funcionarios', { user })
+      res.render('add/addFuncionarios', { user })
     }
-
   }
 }
