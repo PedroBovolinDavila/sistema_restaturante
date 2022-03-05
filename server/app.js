@@ -17,10 +17,10 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 app.use(cors());
-app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(cookieParser());
 app.use('/css', express.static(path.join(__dirname, '..', '/public/css')));
 app.use('/audio', express.static(path.join(__dirname, '..', '/public/audio')));
 app.use('/js', express.static(path.join(__dirname, '..', '/public/js')));

@@ -1,6 +1,6 @@
 const Product = require('../models/Product');
+const User = require('../models/User');
 const getUserData = require('../services/getUserData');
-const verifyAdmin = require('../services/verifyAdmin');
 
 module.exports = {
   async index(req, res) {
@@ -13,8 +13,9 @@ module.exports = {
       res.render('index', { user: { name: "", _id: '' }, });
     } else {
       notAdminError ?
-        res.render('index', { user, error: { message: 'Vocẽ não tem permissoes para acessar essa pagina' } }) :
-        res.render('index', { user, error: null })
+        res.render('index', { user, error: 'Você não tem permições suficientes.' }) :
+        res.render('index', { user, error: undefined })
+
     }
   },
 
@@ -34,14 +35,13 @@ module.exports = {
     const { success } = req.query;
 
     const user = await getUserData(userId);
-    const isAdmin = await verifyAdmin(userId);
 
-    if (!user || !view) {
+    if (!userId || !view) {
       res.redirect('/')
       return
     }
 
-    if (!isAdmin) {
+    if (!user.isAdmin) {
       res.redirect('/?notAdminError=true');
       return
     }
@@ -69,17 +69,11 @@ module.exports = {
     const { view } = req.params;
     const { userId } = req.cookies;
 
-    const user = await getUserData(userId);
-    const isAdmin = await verifyAdmin(userId);
+    const user = getUserData(userId);
 
     if (!user || !view) {
       res.redirect('/')
       return;
-    }
-
-    if (!isAdmin) {
-      res.redirect('/?notAdminError=true');
-      return
     }
 
     if (view === 'produtos') {

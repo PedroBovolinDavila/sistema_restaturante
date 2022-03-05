@@ -31,6 +31,7 @@ module.exports = {
 
     if (!passwordMatch) return res.redirect('/login?err=true');
 
+    // res.cookie('userId', user._id)
     res.cookie('userId', user._id.toString());
 
     return res.redirect('/');

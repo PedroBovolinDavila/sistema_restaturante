@@ -6,6 +6,6 @@ module.exports = async (userId) => {
 
     return user;
   } catch (err) {
-    return err;
+    console.log(err)
   }
 }

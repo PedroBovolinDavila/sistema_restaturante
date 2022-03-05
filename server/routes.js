@@ -23,11 +23,11 @@ const upload = multer({
 
 // App routes
 
-router.get('/', AppController.index);
-router.get('/login', AppController.login);
-router.get('/gestao/:view', AppController.gestao);
 router.get('/logoff', AppController.logoff);
+router.get('/gestao/:view', AppController.gestao);
 router.get('/add/:view', AppController.add);
+router.get('/login', AppController.login);
+router.get('/', AppController.index);
 
 // User routes 
 

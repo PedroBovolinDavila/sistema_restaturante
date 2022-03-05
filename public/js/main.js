@@ -20,7 +20,6 @@ function validateLogin(id) {
 validateLogin(userId)
 
 function deslogar() {
-  document.cookie = 'userId=false;'
   fetch('/logoff')
     .then(res => res.json())
     .then(data => {

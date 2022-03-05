@@ -10,60 +10,63 @@
 
 
     <div class="container">
-      <div class="row mt-4">
-        <% if (message !=null) { %>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <%= message.desc %>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <% if (message !=null) { %>
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <%= message.desc %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
           </div>
-          <% } %>
-      </div>
-      <div class="row align-items-center mt-4">
-        <div class="col-12">
-          <div class="table-responsive">
-            <table class="table table-hover table-striped">
-              <thead class="table-dark">
-                <tr>
-                  <th scope="col">Imagem</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Preço</th>
-                </tr>
-              </thead>
-              <tbody id="table-data-add">
-                <% if (products) { %>
-                  <% for( let index=0; index < products.length; index++ ) { %>
-                    <tr id="<%= products[index]._id %> " class="align-middle">
-                      <th scope="row" id="<%= products[index]._id %> " class=" text-center">
-                        <img src="/img/<%= products[index].image %> " alt="Produto <%= products[index].nome %>"
-                          width="50" class="img-thumbnail">
-                      </th>
-                      <td id="<%= products[index]._id %> ">
-                        <%= products[index].nome %>
-                      </td>
-                      <td id="<%= products[index]._id %> ">
-                        <%= products[index].desc %>
-                      </td>
-                      <td id="<%= products[index]._id %> ">
-                        R$ <%= products[index].preco %>
-                      </td>
+        </div>
+        <% } %>
+
+          <div class="row align-items-center mt-4">
+            <div class="col-12">
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead class="table-dark">
+                    <tr>
+                      <th scope="col">Imagem</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Desc</th>
+                      <th scope="col">Preço</th>
                     </tr>
-                    <% } %>
-                      <% } %>
-              </tbody>
-            </table>
+                  </thead>
+                  <tbody id="table-data-add">
+                    <% if (products) { %>
+                      <% for( let index=0; index < products.length; index++ ) { %>
+                        <tr id="<%= products[index]._id %> " class="align-middle">
+                          <th scope="row" id="<%= products[index]._id %> " class=" text-center">
+                            <img src="/img/<%= products[index].image %> " alt="Produto <%= products[index].nome %>"
+                              width="50" class="img-thumbnail">
+                          </th>
+                          <td id="<%= products[index]._id %> ">
+                            <%= products[index].nome %>
+                          </td>
+                          <td id="<%= products[index]._id %> ">
+                            <%= products[index].desc %>
+                          </td>
+                          <td id="<%= products[index]._id %> ">
+                            R$ <%= products[index].preco %>
+                          </td>
+                        </tr>
+                        <% } %>
+                          <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <a href="/add/produtos" type="button" class="btn btn-success">
-            Novo
-          </a>
+          <div class="row">
+            <div class="col-12">
+              <a href="/add/produtos" type="button" class="btn btn-success">
+                Novo
+              </a>
 
 
-        </div>
-      </div>
+            </div>
+          </div>
 </body>
 
 </html>
