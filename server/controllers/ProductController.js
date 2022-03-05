@@ -2,22 +2,34 @@ const Product = require('../models/Product');
 
 module.exports = {
   async create(req, res) {
-    const { nome, desc, preco } = req.body;
+    const { nome, desc, preco, categoria } = req.body;
     const { filename } = req.file;
 
+    const newPreco = preco.replace(',', '.');
+
     try {
+
+      const verifyProduct = await Product.findOne({ nome });
+
+      if (verifyProduct) {
+        res.redirect('/add/produtos?addProduct=true');
+        return
+      }
 
       await Product.create({
         nome,
         desc,
-        preco,
+        preco: newPreco,
+        categoria,
         image: filename
       })
 
       res.redirect('/gestao/produtos?success=true');
 
     } catch (err) {
-      res.redirect('/gestao/produtos?success=false');
+      // res.redirect('/gestao/produtos?success=false');
+      res.json(err)
+      console.log(err.message)
     }
   }
 }

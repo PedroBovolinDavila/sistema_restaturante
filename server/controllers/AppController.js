@@ -68,6 +68,7 @@ module.exports = {
   async add(req, res) {
     const { view } = req.params;
     const { userId } = req.cookies;
+    const { addProduct } = req.query;
 
     const user = await getUserData(userId);
 
@@ -77,7 +78,10 @@ module.exports = {
     }
 
     if (view === 'produtos') {
-      res.render('add/addProdutos', { user });
+      addProduct ?
+        res.render('add/addProdutos', { user, error: 'Produto já exite' }) :
+        res.render('add/addProdutos', { user, error: undefined });
+
     } else if (view === 'funcionarios') {
       res.render('add/addFuncionarios', { user })
     }
