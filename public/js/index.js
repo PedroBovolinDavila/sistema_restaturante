@@ -1,4 +1,4 @@
-var socket = io('http://192.168.15.9:3333')
+var socket = io(window.location.href)
 
 const body = document.querySelector('body');
 const table = document.querySelector('#table-data-add');
