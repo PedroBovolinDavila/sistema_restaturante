@@ -52,6 +52,8 @@ router.post('/finalizar/cancelar/:reqId', FinishedController.addCancelada);
 
 // Product routes 
 
+router.get('/produtos/:id', ProductController.findById);
+
 router.post('/produtos/create', upload, ProductController.create);
 
 // Category routes 

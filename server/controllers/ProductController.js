@@ -31,5 +31,19 @@ module.exports = {
       res.json(err)
       console.log(err.message)
     }
+  },
+
+  async findById(req, res) {
+    const { id } = req.params;
+
+    try {
+
+      const product = await Product.findById(id);
+
+      res.json(product);
+
+    } catch (err) {
+      res.json(err);
+    }
   }
 }
