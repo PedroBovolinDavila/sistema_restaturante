@@ -45,5 +45,51 @@ module.exports = {
     } catch (err) {
       res.json(err);
     }
+  },
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    try {
+
+      const deletedProduct = await Product.findByIdAndDelete(id);
+
+      res.json({
+        deletedProduct,
+        success: true
+      });
+
+    } catch (err) {
+      res.json({
+        err,
+        success: false
+      });
+    }
+  },
+
+  async update(req, res) {
+    const { id } = req.params;
+    const { nome, preco, categoria, desc } = req.body;
+
+    try {
+
+      const newProduct = await Product.findByIdAndUpdate(id, {
+        nome,
+        preco,
+        categoria,
+        desc
+      });
+
+      res.json({
+        newProduct,
+        success: true
+      })
+
+    } catch (err) {
+      res.json({
+        err,
+        success: false
+      });
+    }
   }
 }
