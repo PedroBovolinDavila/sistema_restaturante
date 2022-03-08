@@ -34,6 +34,7 @@ router.get('/', AppController.index);
 
 router.post('/users/validate/:id', UserController.validate);
 router.post('/users/login', UserController.login);
+router.post('/users/register', upload, UserController.register);
 
 // Request routes 
 

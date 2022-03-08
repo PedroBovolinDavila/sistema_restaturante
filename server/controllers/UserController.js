@@ -35,5 +35,42 @@ module.exports = {
     res.cookie('userId', user._id.toString());
 
     return res.redirect('/');
+  },
+
+  async register(req, res) {
+    const { name, email, password, isAdmin } = req.body;
+    const { filename } = req.file;
+
+    try {
+
+      const verifyUser = await User.findOne({ email });
+
+      if (verifyUser) {
+        res.json({
+          message: 'Email já cadastrado',
+          success: false
+        })
+        return;
+      };
+
+      const newUser = await User.create({
+        name,
+        email,
+        password: bcrypt.hashSync(password),
+        isAdmin,
+        avatar: filename
+      });
+
+      res.json({
+        newUser,
+        success: true
+      })
+
+    } catch (err) {
+      res.json({
+        err,
+        success: false
+      })
+    }
   }
 }
