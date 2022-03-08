@@ -32,9 +32,13 @@ router.get('/', AppController.index);
 
 // User routes 
 
+router.get('/users/:id', UserController.findById);
+router.get('/users/delete/:id', UserController.delete);
+
 router.post('/users/validate/:id', UserController.validate);
 router.post('/users/login', UserController.login);
 router.post('/users/register', upload, UserController.register);
+router.post('/users/update/:id', UserController.update)
 
 // Request routes 
 

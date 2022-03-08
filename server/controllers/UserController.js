@@ -72,5 +72,79 @@ module.exports = {
         success: false
       })
     }
+  },
+
+  async findById(req, res) {
+    const { id } = req.params;
+
+    try {
+
+      const user = await User.findById(id);
+
+      if (!user) {
+        res.json({
+          success: false,
+          message: 'Usuário nao encontrado'
+        })
+        return;
+      }
+
+      res.json({
+        user,
+        success: true
+      });
+
+    } catch (err) {
+      res.json({
+        err,
+        success: false
+      })
+    }
+  },
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    try {
+
+      const deletedUser = await User.findByIdAndDelete(id);
+
+      res.json({
+        deletedUser,
+        success: true
+      });
+
+    } catch (err) {
+      res.json({
+        err,
+        success: false
+      })
+    }
+  },
+
+  async update(req, res) {
+    const { name, email, isAdmin } = req.body;
+    const { id } = req.params;
+
+    try {
+
+      const updatedUser = await User.findByIdAndUpdate(id, {
+        name,
+        email,
+        isAdmin
+      })
+
+      res.json({
+        updatedUser,
+        success: true
+      })
+
+    } catch (err) {
+      res.json({
+        err,
+        success: false
+      })
+    }
+
   }
 }

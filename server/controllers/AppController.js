@@ -47,7 +47,11 @@ module.exports = {
     }
 
     if (view === 'funcionarios') {
-      res.render('gestao/funcionarios', { user });
+      const users = await User.find();
+
+      success ?
+        res.render('gestao/funcionarios', { user, message: { desc: 'Usuário adicionado com sucesso!', type: 'success' }, users }) :
+        res.render('gestao/funcionarios', { user, message: null, users });
     } else if (view === 'produtos') {
       const products = await Product.find();
 
@@ -83,7 +87,7 @@ module.exports = {
         res.render('add/addProdutos', { user, error: undefined });
 
     } else if (view === 'funcionarios') {
-      res.render('add/addFuncionarios', { user })
+      res.render('add/addFuncionario', { user })
     }
   }
 }

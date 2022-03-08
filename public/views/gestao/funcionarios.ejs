@@ -3,13 +3,109 @@
 
 <head>
   <%- include('../partials/head', {title: 'Restaurante' , noValidate: false, noNav: false}) %>
-    <link rel="stylesheet" href="/css/gestao.css">
 </head>
 
 <body>
-  <%- include('../partials/navbar', { username: user.name, active: 'gestao' } ) %>
+  <%- include('../partials/navbar', { username: user.name, active: 'gestao' , admin: user.isAdmin } ) %>
 
-    funcionarios
+
+    <div class="container">
+      <% if (message !=null) { %>
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <%= message.desc %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
+          <div class="row align-items-center mt-4">
+            <div class="col-12 table-responsive">
+              <table class="table table-hover table-striped">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Imagem</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Admin</th>
+                  </tr>
+                </thead>
+                <tbody id="table-data-add">
+                  <% if (users) { %>
+                    <% for( let index=0; index < users.length; index++ ) { %>
+                      <tr id="<%= users[index]._id %> " class="align-middle userTable text-nowrap user-select-none">
+                        <th scope="row" id="<%= users[index]._id %> " class=" text-center">
+                          <img id="<%= users[index]._id %> " src="/img/<%= users[index].avatar %> "
+                            alt="Produto <%= users[index].name %>" width="70" height="70" class="img-thumbnail">
+                        </th>
+                        <td id="<%= users[index]._id %> ">
+                          <%= users[index].name %>
+                        </td>
+                        <td id="<%= users[index]._id %> ">
+                          <%= users[index].email %>
+                        </td>
+                        <td id="<%= users[index]._id %> ">
+                          <%= users[index].isAdmin ? 'Sim' : 'Não' %>
+                        </td>
+                      </tr>
+                      <% } %>
+                        <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <a href="/add/funcionarios" type="button" class="btn btn-success">
+                Novo
+              </a>
+
+
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="userModalLabel">Usuário <span id="user"></span></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="col-12 text-center mb-5">
+                    <img id="userImage" class="img-thumbnail w-full">
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="userNome" placeholder="Nome do produto">
+                      <label for="userNome">Nome</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="userEmail" placeholder="Nome do Preço">
+                      <label for="userEmail">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <select class="form-control" id="userAdmin" placeholder="Nome do Categoria">
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
+                      </select>
+                      <label for="userAdmin">Admin</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-danger" id="btnDeletar">Deletar</button>
+                  <button type="button" class="btn btn-warning" id="btnSalvar">Salvar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script src="/js/funcionarios.js" defer></script>
 </body>
 
 </html>
