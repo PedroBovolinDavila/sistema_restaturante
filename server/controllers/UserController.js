@@ -46,10 +46,7 @@ module.exports = {
       const verifyUser = await User.findOne({ email });
 
       if (verifyUser) {
-        res.json({
-          message: 'Email já cadastrado',
-          success: false
-        })
+        res.redirect('/add/funcionarios?addFunc=true');
         return;
       };
 
@@ -61,16 +58,10 @@ module.exports = {
         avatar: filename
       });
 
-      res.json({
-        newUser,
-        success: true
-      })
+      res.redirect('/gestao/funcionarios?success=true')
 
     } catch (err) {
-      res.json({
-        err,
-        success: false
-      })
+      res.redirect('/gestao/funcionarios');
     }
   },
 

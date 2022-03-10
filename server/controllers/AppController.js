@@ -72,7 +72,7 @@ module.exports = {
   async add(req, res) {
     const { view } = req.params;
     const { userId } = req.cookies;
-    const { addProduct } = req.query;
+    const { addProduct, addFunc } = req.query;
 
     const user = await getUserData(userId);
 
@@ -87,7 +87,9 @@ module.exports = {
         res.render('add/addProdutos', { user, error: undefined });
 
     } else if (view === 'funcionarios') {
-      res.render('add/addFuncionario', { user })
+      addFunc ?
+        res.render('add/addFuncionario', { user, error: 'Usuário ja existe' }) :
+        res.render('add/addFuncionario', { user, error: undefined });
     }
   }
 }
