@@ -1,9 +1,21 @@
 var socket = io(window.location.host)
 
 const cardContainer = document.querySelector('#cardcontainer');
+const tableContainer = document.querySelector('#salao-pedidos-table');
 const salaoModal = new bootstrap.Modal(document.querySelector('#salaoModal'), {
   keyboard: false
 });
+const salaoModalPedidos = new bootstrap.Modal(document.querySelector('#salaoModalPedidos'), {
+  keyboard: false
+});
+
+function decremento() {
+  document.querySelector('#salaoQuant').value--;
+}
+
+function incremento() {
+  document.querySelector('#salaoQuant').value++;
+}
 
 function onLoad() {
   if (localStorage.getItem('idCarrinho') && localStorage.getItem('numMesa')) {
@@ -25,7 +37,7 @@ function filter(filtro) {
 }
 
 async function showModal(productId) {
-  let produto;
+  let produto, preco;
 
   const res = await fetch(`/produtos/${productId}`);
   const data = await res.json();
@@ -36,6 +48,9 @@ async function showModal(productId) {
   }
 
   produto = data.nome;
+  preco = data.preco.$numberDecimal
+
+  console.log(preco)
 
   document.querySelector('#salaoImagem').src = `/img/${data.image}`;
   document.querySelector('#salaoNome').innerHTML = produto
@@ -43,10 +58,15 @@ async function showModal(productId) {
 
   salaoModal.show();
 
-  document.querySelector('#salaoBtnSalvar').addEventListener('click', () => {
+  document.querySelector('#salaoBtnSalvar').addEventListener('click', async () => {
     let quantidade = document.querySelector('#salaoQuant').value;
     let adicionais = document.querySelector('#salaoAdicionais').value;
     let mesa = localStorage.getItem('numMesa')
+
+    if (!quantidade || !mesa) {
+      alert('Erro ao cadastrar produtos, tente novamente ou chame algum funcioanrio ');
+      return
+    }
 
     let desc = `${quantidade} ${produto}`;
 
@@ -54,6 +74,29 @@ async function showModal(productId) {
       mesa,
       desc,
       adicionais
+    }
+
+    const res = await fetch('/cart/add', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        mesa,
+        product: {
+          nome: produto,
+          preco,
+          quantidade
+        }
+      })
+    })
+
+    const data = await res.json();
+
+    if (!data.success) {
+      alert('Erro ao adicionar ao carrinho', + data.err);
+      return;
     }
 
     socket.emit('sendReq', obj);
@@ -132,5 +175,44 @@ function mostrarCardapio() {
       document.querySelector('#cardapio').classList.remove('d-none');
 
       loadSalao()
+    })
+}
+
+function createTableData(product) {
+  const tr = document.createElement('tr');
+  const dataHTML = `<tr>
+  <td>${product.nome}</td>
+  <td>${product.quantidade}</td>
+  <td>R$ ${product.preco}</td>
+</tr>`
+
+  tr.innerHTML = dataHTML;
+  tableContainer.appendChild(tr);
+}
+
+function showModalPedidos() {
+  const mesa = localStorage.getItem('numMesa');
+
+  fetch(`/cart/${mesa}`)
+    .then(res => res.json())
+    .then(data => {
+      let total = 0;
+
+      if (!data.success) {
+        alert('Erro ao achar carrinho, tente novamente ou chame um atendente');
+        return;
+      }
+
+      data.cart.products.map(product => {
+        createTableData(product)
+
+        let produtoTotal = parseInt(product.quantidade) * parseFloat(product.preco);
+        total += produtoTotal;
+      });
+
+      document.querySelector('#salaoPedidosMesa').innerHTML = data.cart.mesa
+      document.querySelector('#salaoPrecoTotal').innerHTML = `R$ ${total}`;
+
+      salaoModalPedidos.show();
     })
 }

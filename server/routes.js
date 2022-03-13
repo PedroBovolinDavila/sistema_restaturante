@@ -74,6 +74,9 @@ router.post('/categorias/create', CategoryController.add);
 
 // Cart routes
 
+router.get('/cart/:mesa', CartController.findByMesa);
+
+router.post('/cart/add', CartController.add);
 router.post('/cart/create', CartController.create);
 
 module.exports = router;
