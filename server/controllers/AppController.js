@@ -1,5 +1,7 @@
 const Product = require('../models/Product');
 const User = require('../models/User');
+const Categories = require('../models/Category');
+
 const getUserData = require('../services/getUserData');
 
 module.exports = {
@@ -59,7 +61,9 @@ module.exports = {
         res.render('gestao/produtos', { user, message: { desc: 'Produto adicionado com sucesso!', type: 'success' }, products }) :
         res.render('gestao/produtos', { user, message: null, products });
     } else if (view === 'salao') {
-      res.render('gestao/salao', { user });
+      const categorias = await Categories.find();
+
+      res.render('gestao/salao', { user, categorias });
     }
   },
 

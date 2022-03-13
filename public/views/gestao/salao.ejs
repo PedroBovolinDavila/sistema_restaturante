@@ -5,24 +5,104 @@
   <%- include('../partials/head', {title: 'Restaurante' , noValidate: false, noNav: false}) %>
 </head>
 
-<body>
-  <%- include('../partials/navbar', { username: user.name, active: 'salao' } ) %>
+<body onload="onLoad()">
 
-    <div class="row">
-      <div class="col-12">
-        <form id="form">
-          <input type="number" placeholder="mesa" name="mesa" id="mesa">
-          <input type="text" placeholder="desc" name="desc" id="desc">
-          <input type="text" placeholder="adicionais" name="adicionais" id="adicionais">
-          <button type="submit">Enviar</button>
-        </form>
+  <div id="loading" class="vw-100 vh-100 bg-dark d-flex align-items-center justify-content-center flex-column">
+    <h1 class="h1 text-white">Seja bem-vindo</h1>
+    <div class="form-floating mt-4">
+      <input type="email" class="form-control" id="inputMesa" placeholder="name@example.com">
+      <label for="inputMesa">Infome o número de sua mesa</label>
+    </div>
+    <button onclick="mostrarCardapio()" class="btn btn-lg btn-outline-light mt-4">Abrir cardapio</button>
+  </div>
+
+  <div id="cardapio" class="container-fluid d-none">
+    <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+          <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-5 d-none d-sm-inline">Cardapio</span>
+          </a>
+          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+            <li class="nav-item" onclick="loadSalao()">
+              <a class="text-white nav-link align-middle px-0">
+                <i class=" fa-solid fa-list"></i> <span class="ms-1 d-none d-sm-inline">Todos</span>
+              </a>
+            </li>
+            <% for( let index=0; index < categorias.length; index++ ) { %>
+              <li class="nav-item">
+                <a class="text-white nav-link align-middle px-0" onclick="filter('<%= categorias[index].desc %>')">
+                  <i class=" fa-solid fa-list"></i> <span class="ms-1 d-none d-sm-inline">
+                    <%= categorias[index].desc %>
+                  </span>
+                </a>
+              </li>
+              <% } %>
+          </ul>
+          <hr>
+          <div class="dropdown pb-4">
+            <a class="d-flex align-items-center align-middle text-white text-decoration-none dropdown-toggle"
+              id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user"></i>
+              <span class="d-none d-sm-inline ms-2">Atendente</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+              <li><a class="dropdown-item">Meus pedidos</a></li>
+              <li><a class="dropdown-item">Finalizar conta</a></li>
+              <li><a class="dropdown-item">Chamar atentende</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col py-4 overflow-auto vh-100">
+
+        <div id="cardcontainer" class="row justify-content-evenly gap-4 ">
+          <!-- Conteudo via javascript -->
+        </div>
+
       </div>
     </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"
-      integrity="sha512-MgkNs0gNdrnOM7k+0L+wgiRc5aLgl74sJQKbIWegVIMvVGPc1+gc1L2oK9Wf/D9pq58eqIJAxOonYPVE5UwUFA=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/js/salao.js" defer></script>
+  <div class="modal fade" id="salaoModal" tabindex="-1" aria-labelledby="salaoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="salaoModalLabel">Produto <span id="salaoNome"></span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="col-12 text-center mb-5">
+            <img id="salaoImagem" class="img-thumbnail w-full">
+          </div>
+          <div class="col-12">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="salaoProduto" placeholder="Nome do produto">
+              <label for="salaoProduto">Produto</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="number" value="1" class="form-control" id="salaoQuant" placeholder="Nome do Preço">
+              <label for="salaoQuant">Quantidade</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="salaoAdicionais" placeholder="Nome do produto">
+              <label for="salaoAdicionais">Adicionais</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-warning" id="salaoBtnSalvar">Adicionar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"
+    integrity="sha512-MgkNs0gNdrnOM7k+0L+wgiRc5aLgl74sJQKbIWegVIMvVGPc1+gc1L2oK9Wf/D9pq58eqIJAxOonYPVE5UwUFA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/js/salao.js" defer> </script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-var socket = io(window.location.href)
+var socket = io(window.location.host)
 
 const body = document.querySelector('body');
 const table = document.querySelector('#table-data-add');

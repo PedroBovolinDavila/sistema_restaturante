@@ -91,5 +91,31 @@ module.exports = {
         success: false
       });
     }
+  },
+
+  async findAll(req, res) {
+    try {
+
+      const products = await Product.find();
+
+      res.json(products);
+
+    } catch (err) {
+      res.json(err);
+    }
+  },
+
+  async findByCategory(req, res) {
+    const { category } = req.params;
+
+    try {
+
+      const products = await Product.find({ categoria: category });
+
+      res.json(products);
+
+    } catch (err) {
+      res.json(err);
+    }
   }
 }

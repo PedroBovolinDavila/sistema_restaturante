@@ -8,6 +8,7 @@ const RequestController = require('./controllers/RequestController');
 const FinishedController = require('./controllers/FinishedController');
 const ProductController = require('./controllers/ProductController');
 const CategoryController = require('./controllers/CategoryController');
+const CartController = require('./controllers/CartController');
 
 const storageConfig = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -57,7 +58,9 @@ router.post('/finalizar/cancelar/:reqId', FinishedController.addCancelada);
 
 // Product routes 
 
+router.get('/produtos', ProductController.findAll);
 router.get('/produtos/:id', ProductController.findById);
+router.get('/produtos/categoria/:category', ProductController.findByCategory);
 router.get('/produtos/delete/:id', ProductController.delete);
 
 router.post('/produtos/update/:id', ProductController.update);
@@ -68,5 +71,9 @@ router.post('/produtos/create', upload, ProductController.create);
 router.get('/categorias', CategoryController.getAll)
 
 router.post('/categorias/create', CategoryController.add);
+
+// Cart routes
+
+router.post('/cart/create', CartController.create);
 
 module.exports = router;
