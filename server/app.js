@@ -8,7 +8,9 @@ const routes = require('./routes');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+
 const Request = require('./models/Request');
+const Call = require('./models/Call');
 
 // App init and Config
 
@@ -41,13 +43,21 @@ mongoose.connect(process.env.DATABASE_URL)
 
 io.on('connection', async (socket) => {
   const requests = await Request.find();
+  const calls = await Call.find();
 
   socket.emit('anterior', requests)
+  socket.emit('anterior2', calls);
 
   socket.on('sendReq', async (data) => {
     const req = await Request.create(data);
 
     socket.broadcast.emit('reciviedReq', req);
+  })
+
+  socket.on('finalizar', async (data) => {
+    const call = await Call.create(data);
+
+    socket.broadcast.emit('finalizados', call);
   })
 
   socket.on('finishReq', async (data) => {

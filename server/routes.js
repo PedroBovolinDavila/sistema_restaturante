@@ -9,6 +9,7 @@ const FinishedController = require('./controllers/FinishedController');
 const ProductController = require('./controllers/ProductController');
 const CategoryController = require('./controllers/CategoryController');
 const CartController = require('./controllers/CartController');
+const CallController = require('./controllers/CallController');
 
 const storageConfig = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -78,5 +79,9 @@ router.get('/cart/:mesa', CartController.findByMesa);
 
 router.post('/cart/add', CartController.add);
 router.post('/cart/create', CartController.create);
+
+// Call routes
+
+router.post('/chamado/create/:mesa/:tipo', CallController.create)
 
 module.exports = router;

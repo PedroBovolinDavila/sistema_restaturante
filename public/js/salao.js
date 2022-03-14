@@ -217,5 +217,15 @@ function showModalPedidos() {
       document.querySelector('#salaoPrecoTotal').innerHTML = `R$ ${total}`;
 
       salaoModalPedidos.show();
+
+      document.querySelector('#btnFinalizar').addEventListener('click', () => {
+        const obj = {
+          mesa,
+          tipo: 'Pagamento',
+          preco: total
+        };
+
+        socket.emit('finalizar', obj);
+      })
     })
 }

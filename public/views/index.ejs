@@ -26,7 +26,7 @@
             <div class="col-12">
               <div class="table-responsive">
                 <table class="table table-hover table-striped">
-                  <!-- <caption>Lista de pedidos</caption> -->
+                  <caption>Lista de pedidos</caption>
                   <thead class="table-dark">
                     <tr>
                       <th scope="col">Mesa</th>
@@ -41,82 +41,56 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mt-5">
             <div class="col-12">
-              <% let userId=user._id %>
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Novo
-                </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Novo pedido</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <table class="table table-hover table-striped">
+                <caption>Lista de chamados</caption>
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Mesa</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Preço</th>
+                  </tr>
+                </thead>
+                <tbody id="table-data-add2">
+                  <!-- Conteudo adicionado via javascript -->
+
+                </tbody>
+              </table>
+
+              <!-- Modal 2 -->
+              <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Pedido mesa <span id="modalMesa"></span></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-floating mb-3">
+                        <input type="text" name="email" class="form-control" id="modalNumeroMesa"
+                          placeholder="name@example.com">
+                        <label for="numeroMesa">Número da mesa</label>
                       </div>
-                      <div class="modal-body">
-                        <form action="/pedidos/create" method="post">
-                          <div class="form-floating mb-3">
-                            <input type="number" name="email" class="form-control" id="numeroMesa"
-                              placeholder="name@example.com">
-                            <label for="numeroMesa">Número da mesa</label>
-                          </div>
-                          <div class="form-floating mb-3">
-                            <input type="text" name="password" class="form-control" id="pedido" placeholder="Password">
-                            <label for="pedido">Pedido</label>
-                          </div>
-                          <div class="form-floating mb-3">
-                            <input type="text" name="password" class="form-control" id="adicionais"
-                              placeholder="Password">
-                            <label for="adicionais">Adicionais</label>
-                          </div>
-                        </form>
+                      <div class="form-floating mb-3">
+                        <input type="text" name="text" class="form-control" id="modalPedido" placeholder="modalPedido">
+                        <label for="pedido">Pedido</label>
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" onclick="AddPedido()" class="btn btn-success">Adicionar</button>
+                      <div class="form-floating mb-3">
+                        <input type="text" name="password" class="form-control" id="modalAdicionais"
+                          placeholder="Password">
+                        <label for="adicionais">Adicionais</label>
                       </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="btnCancelar" class="btn btn-danger">Cancelar</button>
+                      <button type="button" id="btnSalvar" class="btn btn-warning">Salvar</button>
+                      <button type="button" id="btnFinalizar" class="btn btn-success">Finalizar</button>
                     </div>
                   </div>
                 </div>
-
-                <!-- Modal 2 -->
-                <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Pedido mesa <span id="modalMesa"></span></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="form-floating mb-3">
-                          <input type="text" name="email" class="form-control" id="modalNumeroMesa"
-                            placeholder="name@example.com">
-                          <label for="numeroMesa">Número da mesa</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                          <input type="text" name="text" class="form-control" id="modalPedido"
-                            placeholder="modalPedido">
-                          <label for="pedido">Pedido</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                          <input type="text" name="password" class="form-control" id="modalAdicionais"
-                            placeholder="Password">
-                          <label for="adicionais">Adicionais</label>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" id="btnCancelar" class="btn btn-danger">Cancelar</button>
-                        <button type="button" id="btnSalvar" class="btn btn-warning">Salvar</button>
-                        <button type="button" id="btnFinalizar" class="btn btn-success">Finalizar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              </div>
             </div>
           </div>
     </div>
@@ -125,9 +99,10 @@
       integrity="sha512-MgkNs0gNdrnOM7k+0L+wgiRc5aLgl74sJQKbIWegVIMvVGPc1+gc1L2oK9Wf/D9pq58eqIJAxOonYPVE5UwUFA=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/index.js" defer></script>
-    <script>
-      localStorage.setItem('userId', '<%- userId %>');
-    </script>
+    <% let userId=user._id %>
+      <script>
+        localStorage.setItem('userId', '<%- userId %>');
+      </script>
 
 </body>
 

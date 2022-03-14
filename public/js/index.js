@@ -2,6 +2,7 @@ var socket = io(window.location.host)
 
 const body = document.querySelector('body');
 const table = document.querySelector('#table-data-add');
+const table2 = document.querySelector('#table-data-add2');
 const opcModal = new bootstrap.Modal(document.getElementById('modal2'), {
   keyboard: false
 })
@@ -133,3 +134,28 @@ function adicionais(e) {
       });
   });
 }
+
+function createData(data) {
+  const tr = document.createElement('tr');
+
+  table2.innerHTML += `
+    <tr>
+      <td>${data.mesa}</td>
+      <td>${data.tipo}</td>
+      <td>R$ ${data.preco.$numberDecimal}</td>
+    </tr>
+  `
+}
+
+socket.on('finalizados', data => {
+  createData(data);
+  playAudio()
+})
+
+socket.on('anterior2', data => {
+  table2.innerHTML = ''
+  for (call of data) {
+    createData(call)
+  }
+  playAudio()
+})
