@@ -126,6 +126,7 @@ function createCard(data) {
   <div class="card-body">
     <h5 class="card-title">${data.nome}</h5>
     <p class="card-text">${data.desc}</p>
+    <p class="card-text"><strong>R$ ${data.preco.$numberDecimal}</strong></p>
     <a class="btn btn-primary" onclick="showModal('${data._id}')">Comprar</a>
   </div>
 </div>`
@@ -203,7 +204,9 @@ function showModalPedidos() {
         return;
       }
 
+      tableContainer.innerHTML = '';
       data.cart.products.map(product => {
+
         createTableData(product)
 
         let produtoTotal = parseInt(product.quantidade) * parseFloat(product.preco);
