@@ -34,5 +34,25 @@ module.exports = {
         success: false
       })
     }
+  },
+
+  async findById(req, res) {
+    const { id } = req.params;
+
+    try {
+
+      const call = await Call.findById(id);
+
+      res.json({
+        call,
+        success: true
+      })
+
+    } catch (err) {
+      res.json({
+        message: err,
+        success: false
+      })
+    }
   }
 }

@@ -8,6 +8,9 @@ const salaoModal = new bootstrap.Modal(document.querySelector('#salaoModal'), {
 const salaoModalPedidos = new bootstrap.Modal(document.querySelector('#salaoModalPedidos'), {
   keyboard: false
 });
+const salaoModalPedidos2 = new bootstrap.Modal(document.querySelector('#salaoModalPedidos2'), {
+  keyboard: false
+});
 
 function decremento() {
   document.querySelector('#salaoQuant').value--;
@@ -214,7 +217,7 @@ function showModalPedidos() {
       });
 
       document.querySelector('#salaoPedidosMesa').innerHTML = data.cart.mesa
-      document.querySelector('#salaoPrecoTotal').innerHTML = `R$ ${total}`;
+      document.querySelector('#salaoPrecoTotal').innerHTML = `R$ ${total.toFixed(2)}`;
 
       salaoModalPedidos.show();
 
@@ -226,6 +229,19 @@ function showModalPedidos() {
         };
 
         socket.emit('finalizar', obj);
+
+        salaoModalPedidos.hide();
+        salaoModalPedidos2.show();
+
+        document.querySelector('#salaoPrecoTotal2').innerHTML = `R$ ${total.toFixed(2)}`;
+
+        document.querySelector('#btnSair').addEventListener('click', () => {
+          let button = document.querySelector('#btnSair2');
+          let loading = document.querySelector('#btnLoading');
+
+          loading.classList.add('visually-hidden')
+          button.removeAttribute('disabled')
+        })
       })
     })
 }

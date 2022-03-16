@@ -82,6 +82,8 @@ router.post('/cart/create', CartController.create);
 
 // Call routes
 
+router.get('/chamado/:id', CallController.findById);
+
 router.post('/chamado/create/:mesa/:tipo', CallController.create)
 
 module.exports = router;

@@ -6,6 +6,9 @@ const table2 = document.querySelector('#table-data-add2');
 const opcModal = new bootstrap.Modal(document.getElementById('modal2'), {
   keyboard: false
 })
+const modalPedidos = new bootstrap.Modal(document.querySelector('#modalPedidos'), {
+  keyboard: false
+});
 
 const audio = document.createElement('audio');
 audio.src = '/audio/sino.mp3';
@@ -135,16 +138,50 @@ function adicionais(e) {
   });
 }
 
+function adicionais2(e) {
+  const id = e.target.id;
+
+  if (!id) {
+    alert('Erro ao carregar id, atualize a pagina e tente novamente');
+    return;
+  }
+
+  fetch(`/chamado/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      document.querySelector('#modalPedidosMesa').innerHTML = data.call.mesa;
+      modalPedidos.show();
+
+      let btnFinalizar = document.querySelector('#btnLiberar');
+
+      data.call.tipo == 'Pagamento' ?
+        btnFinalizar.innerHTML = 'Finalizar' :
+        btnFinalizar.innerHTML = 'Concluir'
+
+      btnFinalizar.addEventListener('click', () => {
+        let value = btnFinalizar.innerHTML;
+
+        if (value == 'Finalizar') {
+          console.log('Finalizar');
+        } else {
+          console.log('Concluir')
+        }
+      })
+    })
+}
+
 function createData(data) {
   const tr = document.createElement('tr');
 
-  table2.innerHTML += `
-    <tr>
-      <td>${data.mesa}</td>
-      <td>${data.tipo}</td>
-      <td>R$ ${data.preco.$numberDecimal}</td>
-    </tr>
-  `
+  const dataHTML = `<td id="${data._id}">${data.mesa}</td>
+  <td id="${data._id}">${data.tipo}</td>
+  <td id="${data._id}">R$ ${data.preco.$numberDecimal}</td>`
+
+  tr.innerHTML = dataHTML;
+  tr.addEventListener('click', adicionais2);
+  tr.id = data._id;
+
+  table2.appendChild(tr);
 }
 
 socket.on('finalizados', data => {
