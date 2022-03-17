@@ -172,10 +172,11 @@ function adicionais2(e) {
 
 function createData(data) {
   const tr = document.createElement('tr');
+  let preco = parseFloat(data.preco.$numberDecimal);
 
   const dataHTML = `<td id="${data._id}">${data.mesa}</td>
   <td id="${data._id}">${data.tipo}</td>
-  <td id="${data._id}">R$ ${data.preco.$numberDecimal}</td>`
+  <td id="${data._id}">R$ ${preco.toFixed(2)}</td>`
 
   tr.innerHTML = dataHTML;
   tr.addEventListener('click', adicionais2);
