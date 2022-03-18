@@ -265,3 +265,20 @@ socket.on('verificarFinalizacao', data => {
     button.removeAttribute('disabled');
   }
 })
+
+function chamarAtendente() {
+  const mesa = localStorage.getItem('numMesa');
+
+  if (!mesa) {
+    alert('Erro: Mesa não encontrada, chame um de nossos atendentes');
+    return;
+  }
+
+  const obj = {
+    mesa,
+    tipo: 'Chamado',
+    preco: 00
+  }
+
+  socket.emit('chamarAtendente', obj)
+}

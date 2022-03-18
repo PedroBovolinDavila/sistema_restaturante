@@ -158,17 +158,15 @@ function adicionais2(e) {
         btnFinalizar.innerHTML = 'Finalizar' :
         btnFinalizar.innerHTML = 'Concluir'
 
+      document.querySelector('#btnCancelar').addEventListener('click', () => {
+
+      })
+
       btnFinalizar.addEventListener('click', () => {
-        let value = btnFinalizar.innerHTML;
+        const mesa = data.call.mesa;
 
-        if (value == 'Finalizar') {
-          const mesa = data.call.mesa;
-
-          socket.emit('finalizarTudo', mesa);
-          document.location.reload();
-        } else {
-          console.log('Concluir')
-        }
+        socket.emit('finalizarTudo', mesa);
+        document.location.reload();
       })
     })
 }

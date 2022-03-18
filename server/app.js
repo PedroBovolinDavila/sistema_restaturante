@@ -71,6 +71,12 @@ io.on('connection', async (socket) => {
 
     socket.broadcast.emit('verificarFinalizacao', data);
   })
+
+  socket.on('chamarAtendente', async (data) => {
+    const call = await Call.create(data);
+
+    socket.broadcast.emit('finalizados', call)
+  })
 })
 
 // Open server
