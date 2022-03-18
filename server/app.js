@@ -65,6 +65,12 @@ io.on('connection', async (socket) => {
 
     socket.broadcast.emit('anterior', requests);
   })
+
+  socket.on('finalizarTudo', async (data) => {
+    await Call.deleteOne({ mesa: data });
+
+    socket.broadcast.emit('verificarFinalizacao', data);
+  })
 })
 
 // Open server

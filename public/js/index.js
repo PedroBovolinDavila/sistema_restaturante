@@ -162,7 +162,10 @@ function adicionais2(e) {
         let value = btnFinalizar.innerHTML;
 
         if (value == 'Finalizar') {
-          console.log('Finalizar');
+          const mesa = data.call.mesa;
+
+          socket.emit('finalizarTudo', mesa);
+          document.location.reload();
         } else {
           console.log('Concluir')
         }

@@ -77,6 +77,7 @@ router.post('/categorias/create', CategoryController.add);
 
 router.get('/cart/:mesa', CartController.findByMesa);
 
+router.post('/cart/delete/:mesa', CartController.delete);
 router.post('/cart/add', CartController.add);
 router.post('/cart/create', CartController.create);
 

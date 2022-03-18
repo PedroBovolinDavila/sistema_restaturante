@@ -235,13 +235,33 @@ function showModalPedidos() {
 
         document.querySelector('#salaoPrecoTotal2').innerHTML = `R$ ${total.toFixed(2)}`;
 
-        document.querySelector('#btnSair').addEventListener('click', () => {
-          let button = document.querySelector('#btnSair2');
-          let loading = document.querySelector('#btnLoading');
+        document.querySelector('#btnSair2').addEventListener('click', () => {
+          fetch(`/cart/delete/${mesa}`, { method: 'post' })
+            .then(res => res.json())
+            .then(data => {
+              if (!data.success) {
+                alert('Erro, chame um atendende');
+                return
+              }
 
-          loading.classList.add('visually-hidden')
-          button.removeAttribute('disabled')
+              alert('Muito obrigado por comer em nosso restaurante, volte sempre!');
+
+              localStorage.removeItem('idCarrinho')
+              localStorage.removeItem('numMesa');
+
+              document.location.reload()
+            })
         })
       })
     })
 }
+
+socket.on('verificarFinalizacao', data => {
+  if (data == localStorage.getItem('numMesa')) {
+    const button = document.querySelector('#btnSair2');
+    const loading = document.querySelector('#btnLoading');
+
+    loading.classList.add('visually-hidden');
+    button.removeAttribute('disabled');
+  }
+})

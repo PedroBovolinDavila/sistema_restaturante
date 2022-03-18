@@ -93,5 +93,25 @@ module.exports = {
         success: false
       });
     }
+  },
+
+  async delete(req, res) {
+    const { mesa } = req.params;
+
+    try {
+
+      const deletedCart = await Cart.deleteOne({ mesa });
+
+      res.json({
+        deletedCart,
+        success: true
+      })
+
+    } catch (err) {
+      res.json({
+        err,
+        success: false
+      })
+    }
   }
 }
